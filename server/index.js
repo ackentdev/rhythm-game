@@ -5,7 +5,7 @@ const { getProblems } = require("./controller/inputController");
 
 app.use(express.json());
 
-app.get("/api/problems", getProblems)
+app.get("http://localhost:3333/api/problems", getProblems)
 
 app.listen(port, () => 
 console.log(`Server listening on ${port}`));
