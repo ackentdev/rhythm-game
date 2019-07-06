@@ -3,6 +3,6 @@ import "./Button.css"
 
 export default function Button(props) {
     return(
-        <button onClick={()=>props.clicksta()}><img alt="" src={props.icon}/></button>
+        <button><img alt="" src={props.icon}/></button>
     )
 }

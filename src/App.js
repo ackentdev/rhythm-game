@@ -18,16 +18,23 @@ class App extends Component {
       problems: [],
       currentAnswer: [],
     }
-    this.clicksta = this.clicksta.bind(this);
   }
 
   componentDidMount() {
     this.getProblems()
+    console.log(this.state.problems)
   }
 
-clicksta() {
-  console.log("my button works!");
+getProblems() {
+  axios.get("/api/problems")
+  .then((response) => {
+    this.setState({
+      problems:response.data
+    })
+  })
+  .catch(err => console.log(err));
 }
+
   
   render () {
     const {currentAnswer} = this.state;
@@ -45,7 +52,7 @@ clicksta() {
         {/* <AvengerWindow.js/> */}
       </div>
       <div className="ui">
-        <Button className="thor" icon={thor} clicksta={this.clicksta}/>
+        <Button className="thor" icon={thor}/>
         <Button className="hawkeye" icon={hawkeye}/>
         <Button className="ironman" icon={ironman}/>
         <Button className="hulk" icon={hulk}/>
