@@ -21,8 +21,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getProblems()
-    console.log(this.state.problems)
+    this.getProblems();
   }
 
 getProblems() {
