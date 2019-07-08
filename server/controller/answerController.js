@@ -39,7 +39,6 @@ module.exports={
         res.status(200).send(answers);
     },
     putAnswer: (req, res) => {
-        console.log(req.body)
         const {avenger} = req.body;
         const updateId = req.params.id;
         const answerIndex = answers.findIndex(answer => answer.id == updateId);
@@ -47,6 +46,12 @@ module.exports={
 
             elem.answer.push(avenger)
         
+        res.status(200).send(answers);
+    },
+    deleteAnswer: (req, res) => {
+        const deleteId = req.params.id;
+        const answerIndex = answers.findIndex(answer => answer.id == deleteId);
+        answers[answerIndex].answer.splice(0)
         res.status(200).send(answers);
     }
 }

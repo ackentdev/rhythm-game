@@ -1,7 +1,11 @@
-#target {
+#avenger-window {
     display: flex;
     justify-content: center;
+    align-content: center;
     margin: 10px;
     height: 20vh;
-    background-image: url("http://localhost4000/target.jpeg");
+}
+
+#note-container {
+    display: flex;
 }

@@ -30,6 +30,7 @@ class App extends Component {
     this.getProblems = this.getProblems.bind(this);
     this.changeProblem = this.changeProblem.bind(this);
     this.addAvenger = this.addAvenger.bind(this);
+    this.disassembleAvengers = this.disassembleAvengers.bind(this);
   }
 
   componentDidMount() {
@@ -87,6 +88,14 @@ assembleAvengers() {
   });
 }
 
+disassembleAvengers(id) {
+  axios.delete(`/api/answers/${id}`)
+  .then(response => {
+    this.setState({
+      answers:response.data
+    })
+  })
+}
   
   render () {
     // console.log(this.state.answers[this.state.currentProblem].answer)
@@ -104,12 +113,12 @@ assembleAvengers() {
         <AvengerWindow answers={answers} currentAnswer={currentAnswer} currentProblem={currentProblem}/>
       </div>
       <div className="ui">
-        <DeleteButton/>
+        <DeleteButton disassembleAvengers={this.disassembleAvengers} id={currentProblem+1}/>
         <Button className="thor" icon={thor} avenger={quarter} addAvenger={this.addAvenger} id={currentProblem+1}/>
-        <Button className="hawkeye" icon={hawkeye} avenger={half} addAvenger={this.addAvenger}/>
-        <Button className="ironman" icon={ironman} avenger={dotted} addAvenger={this.addAvenger}/>
-        <Button className="hulk" icon={hulk} avenger={whole} addAvenger={this.addAvenger}/>
-        <PostButton assembleAvengers={this.assembleAvengers} currentAnswer={currentAnswer}/>
+        <Button className="hawkeye" icon={hawkeye} avenger={half} addAvenger={this.addAvenger} id={currentProblem+1}/>
+        <Button className="ironman" icon={ironman} avenger={dotted} addAvenger={this.addAvenger} id={currentProblem+1}/>
+        <Button className="hulk" icon={hulk} avenger={whole} addAvenger={this.addAvenger} id={currentProblem+1}/>
+        <PostButton assembleAvengers={this.assembleAvengers} currentAnswer={currentAnswer} id={currentProblem+1}/>
       </div>
 
     </div>
