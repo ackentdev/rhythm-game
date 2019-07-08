@@ -40,4 +40,4 @@
     //     img: 'whole.png',
     //     matchId: 'd'
     // }
-];
+// ];

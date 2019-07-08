@@ -1,0 +1,7 @@
+#target {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    height: 20vh;
+    background-image: url("http://localhost4000/target.jpeg");
+}

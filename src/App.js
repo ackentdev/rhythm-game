@@ -1,23 +1,32 @@
 import React, {Component} from 'react';
-import axios from "axios";
+import axios from 'axios';
 import './App.css';
 import './Reset.css'
-import logo from "./media/a-logo.png";
 import hulk from "./media/hulk.png";
-import ironman from "./media/ironman.png";
+import ironman from './media/ironman.png';
 import hawkeye from "./media/hawkeye.png";
 import thor from "./media/thor.png";
+import quarter from "./media/quarter-thor.png";
+import half from "./media/half-hawkeye.jpg";
+import dotted from "./media/dottedhalf-ironman.png";
+import whole from "./media/whole-hulk.jpg";
 
-// import EnemyWindow from "./components/EnemyWindow";
+import Menu from "./components/Menu";
+import EnemyWindow from "./components/EnemyWindow";
+import AvengerWindow from "./components/AvengerWindow";
 import Button from "./components/Button";
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
-      problems: [],
+      problems: null,
+      currentProblem: 0,
       currentAnswer: [],
     }
+    this.getProblems = this.getProblems.bind(this);
+    this.changeProblem = this.changeProblem.bind(this);
+    this.addAvenger = this.addAvenger.bind(this);
   }
 
   componentDidMount() {
@@ -31,30 +40,42 @@ getProblems() {
       problems:response.data
     })
   })
-  .catch(err => console.log(err));
+  .catch((err) => {
+    console.log(err)
+  });
 }
 
+changeProblem(x) {
+  this.setState({
+    currentProblem: x
+  })
+}
+
+addAvenger(avenger) {
+  this.setState({
+    currentAnswer: this.state.currentAnswer.push(avenger)
+  })
+}
   
   render () {
-    const {currentAnswer} = this.state;
+    const {currentAnswer, currentProblem, problems} = this.state;
   return (
     <div className="App">
       <nav>
-        <img alt='' src={logo}/>
-        <div className="history"></div>
+      <Menu problems={problems} currentProblem={currentProblem}  changeProblem={this.changeProblem}></Menu>
       </nav>
       <div className ="enemies">
-      {/* <EnemyWindow/> */}
+      <EnemyWindow problems={problems} currentProblem={currentProblem}/>
       {/* <PlayButton.js/> */}
       </div>
       <div className="avengers">
-        {/* <AvengerWindow.js/> */}
+        <AvengerWindow currentAnswer={currentAnswer}/>
       </div>
       <div className="ui">
-        <Button className="thor" icon={thor}/>
-        <Button className="hawkeye" icon={hawkeye}/>
-        <Button className="ironman" icon={ironman}/>
-        <Button className="hulk" icon={hulk}/>
+        <Button className="thor" icon={thor} avenger={quarter} addAvenger={this.addAvenger}/>
+        <Button className="hawkeye" icon={hawkeye} avenger={half} addAvenger={this.addAvenger}/>
+        <Button className="ironman" icon={ironman} avenger={dotted} addAvenger={this.addAvenger}/>
+        <Button className="hulk" icon={hulk} avenger={whole} addAvenger={this.addAvenger}/>
         {/* <PostButton/> */}
       </div>
 

@@ -1,8 +1,17 @@
 import React from "react";
+import "./AvengerWindow.css"
 export default function AvengerWindow(props) {
-    // const avengersAssemble = currentAnswer.map
-    // return()
+    const mappedAvengers = props.currentAnswer.map(elem => {
+        debugger;
+        return(
+            <div key={}>
+                <img src={elem}/>
+            </div>
+        )
+    })
     return (
-        // <div>{avengersAssemble}</div>
+        <div id="target">
+            {mappedAvengers};
+        </div>
     )
-}
+    }

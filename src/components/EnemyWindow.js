@@ -1,9 +1,10 @@
 import React from "react";
-import quarter4 from "../media/enemyLibrary/quarter4.png";
+import "./EnemyWindow.css";
 
-export default function EnemyWindow() {
-    const mappedEnemies = 
+export default function EnemyWindow(props) {
         return(
-            <img src={quarter4}/>
+            <div id="enemy-component">
+      {props.problems && <img alt='' src={props.problems[props.currentProblem].img}/>}
+            </div>
         );
 }
