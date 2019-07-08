@@ -15,7 +15,7 @@ import Menu from "./components/Menu";
 import EnemyWindow from "./components/EnemyWindow";
 import AvengerWindow from "./components/AvengerWindow";
 import Button from "./components/Button";
-import PostButton from './components/PostButton';
+import CheckButton from './components/CheckButton';
 import DeleteButton from "./components/DeleteButton"
 
 class App extends Component {
@@ -31,6 +31,7 @@ class App extends Component {
     this.changeProblem = this.changeProblem.bind(this);
     this.addAvenger = this.addAvenger.bind(this);
     this.disassembleAvengers = this.disassembleAvengers.bind(this);
+    this.answerChecker = this.answerChecker.bind(this);
   }
 
   componentDidMount() {
@@ -56,8 +57,18 @@ changeProblem(x) {
   })
 }
 
+answerChecker() {
+  const getToThePoint = this.state.answers[this.state.currentProblem]
+  console.log("answer:", getToThePoint.answer)
+  console.log("answerKey:", getToThePoint.answerKey)
+  if(getToThePoint.answer === getToThePoint.answerKey){
+  alert("Success! You've warded off the aliens!")
+  } else {
+    alert("Womp-womp! Try again!")
+  }
+}
+
 addAvenger(id, avenger) {
-  console.log(avenger);
   axios.put(`/api/answers/${id}`, {avenger})
   .then(response => {
     this.setState({
@@ -118,7 +129,7 @@ disassembleAvengers(id) {
         <Button className="hawkeye" icon={hawkeye} avenger={half} addAvenger={this.addAvenger} id={currentProblem+1}/>
         <Button className="ironman" icon={ironman} avenger={dotted} addAvenger={this.addAvenger} id={currentProblem+1}/>
         <Button className="hulk" icon={hulk} avenger={whole} addAvenger={this.addAvenger} id={currentProblem+1}/>
-        <PostButton assembleAvengers={this.assembleAvengers} currentAnswer={currentAnswer} id={currentProblem+1}/>
+        <CheckButton answerChecker={this.answerChecker}/>
       </div>
 
     </div>

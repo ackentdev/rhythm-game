@@ -15,7 +15,6 @@ export default function AvengerWindow(props) {
     //         {mappedAvengers};
     //     </div>
     // )
-    console.log(props)
     return (
         <div id="avenger-window">
             {props.answers? <div id={"note-container"}>{mappedAvengers}</div> : null}
