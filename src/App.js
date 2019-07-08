@@ -24,7 +24,7 @@ class App extends Component {
     this.state = {
       problems: null,
       currentProblem: 0,
-      answers: null,
+      answers: [],
       currentAnswer: []
     }
     this.getProblems = this.getProblems.bind(this);
@@ -55,9 +55,13 @@ changeProblem(x) {
   })
 }
 
-addAvenger(avenger) {
-  this.setState({
-    currentAnswer: [...this.state.currentAnswer, avenger]
+addAvenger(id, avenger) {
+  console.log(avenger);
+  axios.put(`/api/answers/${id}`, {avenger})
+  .then(response => {
+    this.setState({
+      answers: response.data
+    })
   })
 }
 
@@ -74,7 +78,7 @@ getAnswers() {
 }
 
 assembleAvengers() {
-  axios.post("/api/answers", [...this.state.currentAnswer])
+  axios.post("/api/answers", this.state.currentAnswer)
   .then(response => {
     this.setState({ 
       answers: response.data,
@@ -85,7 +89,8 @@ assembleAvengers() {
 
   
   render () {
-    const {currentAnswer, currentProblem, problems} = this.state;
+    // console.log(this.state.answers[this.state.currentProblem].answer)
+    const {answers, currentAnswer, currentProblem, problems} = this.state;
   return (
     <div className="App">
       <nav>
@@ -96,11 +101,11 @@ assembleAvengers() {
       {/* <PlayButton.js/> */}
       </div>
       <div className="avengers">
-        <AvengerWindow currentAnswer={currentAnswer}/>
+        <AvengerWindow answers={answers} currentAnswer={currentAnswer} currentProblem={currentProblem}/>
       </div>
       <div className="ui">
         <DeleteButton/>
-        <Button className="thor" icon={thor} avenger={quarter} addAvenger={this.addAvenger}/>
+        <Button className="thor" icon={thor} avenger={quarter} addAvenger={this.addAvenger} id={currentProblem+1}/>
         <Button className="hawkeye" icon={hawkeye} avenger={half} addAvenger={this.addAvenger}/>
         <Button className="ironman" icon={ironman} avenger={dotted} addAvenger={this.addAvenger}/>
         <Button className="hulk" icon={hulk} avenger={whole} addAvenger={this.addAvenger}/>
