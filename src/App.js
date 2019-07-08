@@ -15,7 +15,8 @@ import Menu from "./components/Menu";
 import EnemyWindow from "./components/EnemyWindow";
 import AvengerWindow from "./components/AvengerWindow";
 import Button from "./components/Button";
-import PutButton from './components/PutButton';
+import PostButton from './components/PostButton';
+import DeleteButton from "./components/DeleteButton"
 
 class App extends Component {
   constructor() {
@@ -23,18 +24,17 @@ class App extends Component {
     this.state = {
       problems: null,
       currentProblem: 0,
-      currentAnswer: [],
-      previousAnswers: [],
-      answerkey: ''
+      answers: null,
+      currentAnswer: []
     }
     this.getProblems = this.getProblems.bind(this);
     this.changeProblem = this.changeProblem.bind(this);
     this.addAvenger = this.addAvenger.bind(this);
-    this.assembleAvengers = this.assembleAvengers.bind(this);
   }
 
   componentDidMount() {
     this.getProblems();
+    this.getAnswers();
   }
 
 getProblems() {
@@ -61,15 +61,26 @@ addAvenger(avenger) {
   })
 }
 
-assembleAvengers() {
-  const team = this.state.currentAnswer;
-  axios.post(`/api/problems`, team)
+getAnswers() {
+  axios.get("/api/answers")
   .then((response) => {
     this.setState({
-      previousAnswers: response.data,
-      currentAnswer: []
+      answers:response.data
     })
   })
+  .catch((err) => {
+    console.log(err)
+  });
+}
+
+assembleAvengers() {
+  axios.post("/api/answers", [...this.state.currentAnswer])
+  .then(response => {
+    this.setState({ 
+      answers: response.data,
+      currentAnswer: []
+    });
+  });
 }
 
   
@@ -88,11 +99,12 @@ assembleAvengers() {
         <AvengerWindow currentAnswer={currentAnswer}/>
       </div>
       <div className="ui">
+        <DeleteButton/>
         <Button className="thor" icon={thor} avenger={quarter} addAvenger={this.addAvenger}/>
         <Button className="hawkeye" icon={hawkeye} avenger={half} addAvenger={this.addAvenger}/>
         <Button className="ironman" icon={ironman} avenger={dotted} addAvenger={this.addAvenger}/>
         <Button className="hulk" icon={hulk} avenger={whole} addAvenger={this.addAvenger}/>
-        <PutButton assembleAvengers={this.assembleAvengers} id={currentProblem} currentAnswer={currentAnswer}/>
+        <PostButton assembleAvengers={this.assembleAvengers} currentAnswer={currentAnswer}/>
       </div>
 
     </div>

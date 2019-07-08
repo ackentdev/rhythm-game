@@ -3,8 +3,6 @@ const problems = [
             id: 1,
             img: "http://localhost:4000/quarter4.png",
             matchId: 'aaaa',
-            answer: [],
-            correctAnswer: ''
         },
         {
             id: 2,
@@ -40,26 +38,11 @@ const problems = [
             id: 8,
             img: "http://localhost:4000/whole.png",
             matchId: 'd'
-        }
+        },
     ]
 
 module.exports = {
     getProblems: (req, res) => {
         res.status(200).send(problems);
-    },
-    avengersAssemble: (req, res) => {
-        const { currentAnswer } = req.body;
-        problems[id].answer.push(currentAnswer);
-        res.status(200).send(problems);
     }
-    // avengersAssemble: (req, res) => {
-    //     const problemId = req.params.id;
-    //     const problemIndex = problems.findIndex((problem) => problem.id == problemId);
-    //     const {currentAnswer} = req.query;
-    //     if(problemIndex === -1) {
-    //         res.status(404).send("Womp-Womp! Index not found!");
-    //     } else {
-    //         problems[problemIndex].answer.answerImg.push(currentAnswer)
-    //     }
-    // }
-}
+    }

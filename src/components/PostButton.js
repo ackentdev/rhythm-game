@@ -3,6 +3,6 @@ import pow from "../media/pow.png"
 
 export default function PutButton(props) {
     return(
-        <button onClick={() => props.assembleAvengers(props.id)}><img alt='' src={pow}/></button>
+        <button onClick={() => props.assembleAvengers()}><img alt='' src={pow}/></button>
     )
 }
