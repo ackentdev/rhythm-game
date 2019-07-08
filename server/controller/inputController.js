@@ -3,10 +3,8 @@ const problems = [
             id: 1,
             img: "http://localhost:4000/quarter4.png",
             matchId: 'aaaa',
-            answer: {
-                answerImg: [],
-                reducdeId: null
-            }
+            answer: [],
+            correctAnswer: ''
         },
         {
             id: 2,
@@ -30,7 +28,7 @@ const problems = [
         },
         {
             id: 6,
-            img: "http://localhost:4000/dottedhalf-quarter.png",
+            img: "http://localhost:4000/quarter-dottedhalf.png",
             matchId: 'ca'
         },
         {
@@ -50,13 +48,18 @@ module.exports = {
         res.status(200).send(problems);
     },
     avengersAssemble: (req, res) => {
-        const problemId = req.params.id;
-        const problemIndex = problems.findIndex((problem) => problem.id == problemId);
-        const {currentAnswer} = req.query;
-        if(problemIndex === -1) {
-            res.status(404).send("Womp-Womp! Index not found!");
-        } else {
-            problems[problemIndex].answer.answerImg.push(currentAnswer)
-        }
+        const { currentAnswer } = req.body;
+        problems[id].answer.push(currentAnswer);
+        res.status(200).send(problems);
     }
+    // avengersAssemble: (req, res) => {
+    //     const problemId = req.params.id;
+    //     const problemIndex = problems.findIndex((problem) => problem.id == problemId);
+    //     const {currentAnswer} = req.query;
+    //     if(problemIndex === -1) {
+    //         res.status(404).send("Womp-Womp! Index not found!");
+    //     } else {
+    //         problems[problemIndex].answer.answerImg.push(currentAnswer)
+    //     }
+    // }
 }

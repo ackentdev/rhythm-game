@@ -2,9 +2,8 @@ import React from "react";
 import "./AvengerWindow.css"
 export default function AvengerWindow(props) {
     const mappedAvengers = props.currentAnswer.map(elem => {
-        debugger;
         return(
-            <div key={}>
+            <div key={props.currentAnswer.indexOf(elem)}>
                 <img src={elem}/>
             </div>
         )
