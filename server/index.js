@@ -1,19 +1,19 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
-const port = 4000;
-const { getProblems } = require("./controller/problemController");
-const { getAnswers, putAnswer, deleteAnswer } = require("./controller/answerController")
-const path = require('path');
+const session = require('express-session')
+const {SERVER_PORT, SESSION_SECRET} = process.env;
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')))
 
-app.get("/api/problems", getProblems);
+// app.use(session({
+//     secret: SESSION_SECRET,
+//     resave: false, 
+//     saveUninitialized: false,
+//     cookie: {
+//         maxAge: 1000 * 60 * 60 * 24 * 14
+//     }
+//     })
+// );
 
-app.get("/api/answers", getAnswers);
-app.put("/api/answers/:id", putAnswer);
-app.delete("/api/answers/:id", deleteAnswer);
-
-
-app.listen(port, () => 
-console.log(`Server listening on ${port}`));
+app.listen(SERVER_PORT, () => console.log(`listening on port ${SERVER_PORT}🎶`))
