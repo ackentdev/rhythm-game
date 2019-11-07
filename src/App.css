@@ -1,0 +1,34 @@
+.App {
+    background-color: black;
+    color: white;
+    font-family: 'Roboto Mono', monospace;
+}
+.landing-img {
+    height: 150px;
+    width: 150px;
+}
+
+header {
+    display: flex;
+    justify-content: space-around;
+    margin: 0 auto;
+    align-items: center;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+#speech-bubble {
+   background-color: whitesmoke;
+   color: black;
+   font-size: .75em;
+}
+
+.earth {
+    height: 50px;
+    width: 50px;
+}
+
+.astronaut {
+    height: 100px;
+    width: 100px;
+}

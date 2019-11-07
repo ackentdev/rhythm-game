@@ -1,11 +1,20 @@
-import React, {Component} from 'react';
+import React from 'react';
+import "./Reset.css";
+import "./App.css";
+import Landing from './Components/Landing'
 
-class App extends Component {
-  render(){
-    return (
-      <div className="App"></div>
-    )
-  }
-  }
+class App extends React.Component {
+  
 
+  
+
+render() {
+  return (
+    <div className="App">
+        <Landing/>
+    </div>
+  )
+}
+    
+}
 export default App;
