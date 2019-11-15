@@ -3,32 +3,87 @@
     color: white;
     font-family: 'Roboto Mono', monospace;
 }
-.landing-img {
-    height: 150px;
-    width: 150px;
+
+.landing{
+    background-color: black;
+    height: 100vh;
+    font-size: 10px;
 }
 
-header {
+.landing__img {
+    height: 80%;
+}
+
+.landing__upper {
     display: flex;
     justify-content: space-around;
+    height: 35%;
     margin: 0 auto;
     align-items: center;
-    font-size: 1.5em;
+    font-size: 2.7rem;
     text-align: center;
 }
 
-#speech-bubble {
+.landing__lower{
+    height: 65%;
+    position: relative;
+}
+
+.speech-bubble {
    background-color: whitesmoke;
    color: black;
-   font-size: .75em;
+   font-size: .8rem;
+   height: 60%;
+   width: 40%;
+   border-radius: 2.5rem;
+   /* padding: 1.7rem; */
+   position: relative;
+   left:49%;
+   top: 25%;
+   /* text-align: center; */
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.speech-bubble--content {
+    position: absolute;
+    top: 10%;
+    padding: 1rem;
+}
+
+.speech-buble, .carrot {
+    display: none;
 }
 
 .earth {
-    height: 50px;
-    width: 50px;
+    height: 7rem;
+    width: 7rem;
+    position: absolute;
+    top: 10%;
+    left: 5%;
 }
 
 .astronaut {
-    height: 100px;
-    width: 100px;
+    height: 15rem;
+    width: 15rem;
+    position: absolute;
+    bottom: 0;
+    right: 55%;
+}
+
+.btn {
+    border-radius: 2.5rem;
+    border: none;
+    font-family:  'Roboto Mono', monospace;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.btn--red {
+    background-color: #E84849;
+    font-size: 1.1rem;
+    padding: 0.7rem 1.5rem;
+    position: absolute;
+    bottom: 10%;
 }
