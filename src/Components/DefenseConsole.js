@@ -1,16 +1,18 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import ProblemWindow from './ProblemWindow';
+import AnswerWindow from './AnswerWindow';
 import SignIn from './SignIn';
 
 export default class DefenseConsole extends Component{
     constructor(){
         super();
         this.state = {
-            answerToSubmit: '',
+            answerCode: '',
+            answerDisplay: [],
             problems: [],
             problemInWindow: 0,
-            user: null
+            user: null,
         }
     }
 
@@ -68,6 +70,16 @@ export default class DefenseConsole extends Component{
         })
     }
 
+    addToAnswer = () => {
+
+    }
+
+    submitAnswer = () => {
+
+    }
+
+    
+
     render(){
         const {problemInWindow, problems} = this.state;
         return(
@@ -86,6 +98,7 @@ export default class DefenseConsole extends Component{
                     prevProblem={this.prevProblem}
                     url={problems[problemInWindow].img}
                     index={problemInWindow}/>}
+                <AnswerWindow/>
             </div>
             )}
 }
