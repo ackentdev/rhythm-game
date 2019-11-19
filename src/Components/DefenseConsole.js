@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import Header from './Header';
 import ProblemWindow from './ProblemWindow';
 import AnswerWindow from './AnswerWindow';
 
@@ -24,18 +25,18 @@ class DefenseConsole extends Component{
 
     getProblems = async () => {
         const response = await axios.get('/api/get_problems');
-        console.log(response.data)
-        const doTheShuffle = (array) => {
-            for(let i = array.length - 1; i > 0; i--){
-            const j = Math.floor(Math.random() * i)
-            const temp = array[i]
-            array[i] = array[j]
-            array[j] = temp
-          }
-          return array
-          }
+        console.log("getProblems: ",response.data)
+        // const doTheShuffle = (array) => {
+        //     for(let i = array.length - 1; i > 0; i--){
+        //     const j = Math.floor(Math.random() * i)
+        //     const temp = array[i]
+        //     array[i] = array[j]
+        //     array[j] = temp
+        //   }
+        //   return array
+        //   }
         this.setState({
-            problems: doTheShuffle(response.data)
+            problems: response.data
         })
     }
 
@@ -75,14 +76,27 @@ class DefenseConsole extends Component{
         })
     }
 
-    submitAnswer = () => {
+    submitAnswer = async (answer_id) => {
         const { answerCode, problems, problemInWindow } = this.state;
         if(answerCode.join('') !== problems[problemInWindow].answer_code){
             alert("Incorrect answer! Please try again")
             this.setState({answerCode: []})
         } else {
+            const updated = await axios.put(`/api/check_solution/${answer_id}`)
+            // const doTheShuffle = (array) => {
+            //     for(let i = array.length - 1; i > 0; i--){
+            //     const j = Math.floor(Math.random() * i)
+            //     const temp = array[i]
+            //     array[i] = array[j]
+            //     array[j] = temp
+            //   }
+            //   return array
+            //   }
+            this.setState({
+                problems: updated.data,
+                answerCode: []
+            })
             alert("Congratulations! You've saved another piece of rhythm from the aliens!")
-            this.setState({answerCode: []});
             this.nextProblem();
         }
     }
@@ -102,6 +116,7 @@ class DefenseConsole extends Component{
         
         return(
             <div className="defense-console">
+                <Header/>
                 <h1>This is the defense console</h1>
                 {!problems.length 
                     ? 

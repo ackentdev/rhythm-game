@@ -6,6 +6,7 @@ import store from '../redux/store'
 
 function PrivateRoute({ component: Component, ...rest }){
     const user = store.getState();
+    console.log("private route", user)
         return (
           <Route
             {...rest}
