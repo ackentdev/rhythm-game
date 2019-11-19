@@ -6,7 +6,7 @@ const {SERVER_PORT, SESSION_SECRET, CONNECTION_STRING} = process.env;
 const massive = require('massive');
 
 // import from controller
-const {getProblems} = require('./controller/problemCtrl');
+const {getProblems, updateProblemStatus} = require('./controller/problemCtrl');
 const {login, logout, register, getSession} = require('./controller/authCtrl');
 
 app.use(express.json());
@@ -28,6 +28,7 @@ app.use(session({
 
 // ENDPOINTS
 app.get('/api/get_problems', getProblems);
+app.put('/api/check_solution/:answer_id', updateProblemStatus);
 
 // Auth endpoints
 app.post('/auth/register', register);

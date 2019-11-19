@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import ProblemWindow from './ProblemWindow';
 import AnswerWindow from './AnswerWindow';
-import SignIn from './SignIn';
+
 import { connect } from 'react-redux';
 import { setUser } from '../redux/reducer';
 
@@ -10,8 +10,7 @@ class DefenseConsole extends Component{
     constructor(){
         super();
         this.state = {
-            answerCode: '',
-            answerDisplay: [],
+            answerCode: [],
             problems: [],
             problemInWindow: 0,
             user: null
@@ -22,20 +21,9 @@ class DefenseConsole extends Component{
         this.getProblems()
     }
 
-    login = async (username, password) => {
-       const response = await axios.post("/auth/login", {username, password})
-       this.props.setUser(response.data)
-       this.getProblems(response.data.user_id)
 
-    }
-    
-    register = async (username, password) => {
-       const response = await axios.post("/auth/register", {username, password})
-        this.setState({user: response.data})
-    }
-
-    getProblems = async (user_id) => {
-        const response = await axios.get('/api/get_problems', {user_id});
+    getProblems = async () => {
+        const response = await axios.get('/api/get_problems');
         console.log(response.data)
         const doTheShuffle = (array) => {
             for(let i = array.length - 1; i > 0; i--){
@@ -75,24 +63,44 @@ class DefenseConsole extends Component{
         })
     }
 
-    addToAnswer = () => {
-
+    addToAnswer = (letter) => {
+        this.state.answerCode.length < 4
+        ?
+        this.setState({
+            answerCode: [...this.state.answerCode, letter]
+        })
+        :
+        this.setState({
+            answerCode: []
+        })
     }
 
     submitAnswer = () => {
-
+        const { answerCode, problems, problemInWindow } = this.state;
+        if(answerCode.join('') !== problems[problemInWindow].answer_code){
+            alert("Incorrect answer! Please try again")
+            this.setState({answerCode: []})
+        } else {
+            alert("Congratulations! You've saved another piece of rhythm from the aliens!")
+            this.setState({answerCode: []});
+            this.nextProblem();
+        }
     }
 
 
 
     render(){
-        console.log("from redux: ", this.props.user)
+        console.log("from redux2: ", this.props.user)
         const {problemInWindow, problems} = this.state;
+        // const answerStatus = (
+        //     problems[problemInWindow].correct
+        //     ?
+        //     <img alt="correct" src={correct}/>
+        //     :
+        //     <img alt="wrong" src={wrong}/>
+        //     )
+        
         return(
-            !this.props.user
-                ?
-            <SignIn login={this.login} register={this.register}/>
-            :
             <div className="defense-console">
                 <h1>This is the defense console</h1>
                 {!problems.length 
@@ -104,7 +112,11 @@ class DefenseConsole extends Component{
                     prevProblem={this.prevProblem}
                     url={problems[problemInWindow].img}
                     index={problemInWindow}/>}
-                <AnswerWindow/>
+                
+                <AnswerWindow
+                    problem={problems[problemInWindow]} 
+                    addToAnswer={this.addToAnswer}
+                    submitAnswer={this.submitAnswer}/>
             </div>
             )}
 }

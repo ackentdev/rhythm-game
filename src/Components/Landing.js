@@ -27,7 +27,7 @@ export default function Landing(props) {
                   <br></br>
                   Help us! You’re Earth’s last hope!
                 </p>
-              <Link to="/defense-console">
+              <Link to="/sign-in">
                   <button className="btn btn--red">Challenge Accepted</button>
               </Link>
               </div>
