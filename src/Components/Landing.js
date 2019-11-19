@@ -13,7 +13,7 @@ export default function Landing(props) {
               <h1>DEFEND EARTH <br></br> FROM ALIEN <br></br> INVADERS!</h1>
               <img className='landing__img' alt='alien' src={alien}/>
             </header>
-            <body className="landing__lower">
+            <div className="landing__lower">
               <img className='earth' alt='earth' src={earth} />
               <img className='astronaut' alt='astronaut' src={astronaut} />
               <div className="speech-bubble carrot"/>
@@ -31,7 +31,7 @@ export default function Landing(props) {
                   <button className="btn btn--red">Challenge Accepted</button>
               </Link>
               </div>
-            </body>
+            </div>
         </div>
     )
 }

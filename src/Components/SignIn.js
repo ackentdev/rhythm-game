@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { setUser } from '../redux/reducer';
+import "./SignIn.scss"
 
 class SignIn extends Component{
     constructor(){
@@ -49,7 +50,8 @@ class SignIn extends Component{
         const {username, password, newUser} = this.state
     return(
         <div className="sign-in">
-            <form onSubmit={(e) => {
+            <form className="sign-in-form"
+                onSubmit={(e) => {
                 e.preventDefault();
                 !newUser 
                 ? 
