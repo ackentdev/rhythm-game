@@ -6,8 +6,8 @@ const {SERVER_PORT, SESSION_SECRET, CONNECTION_STRING} = process.env;
 const massive = require('massive');
 
 // import from controller
-const {getProblems} = require('./controller');
-const {login, logout, register} = require('./authCtrl');
+const {getProblems} = require('./controller/problemCtrl');
+const {login, logout, register, getSession} = require('./controller/authCtrl');
 
 app.use(express.json());
 
@@ -33,5 +33,6 @@ app.get('/api/get_problems', getProblems);
 app.post('/auth/register', register);
 app.post('/auth/login', login);
 app.post('/auth/logout', logout);
+app.get('/api/userSession', getSession);
 
 app.listen(SERVER_PORT, () => console.log(`listening on port ${SERVER_PORT}🎶`))

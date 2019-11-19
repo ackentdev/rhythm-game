@@ -3,8 +3,10 @@ import axios from 'axios';
 import ProblemWindow from './ProblemWindow';
 import AnswerWindow from './AnswerWindow';
 import SignIn from './SignIn';
+import { connect } from 'react-redux';
+import { setUser } from '../redux/reducer';
 
-export default class DefenseConsole extends Component{
+class DefenseConsole extends Component{
     constructor(){
         super();
         this.state = {
@@ -12,7 +14,7 @@ export default class DefenseConsole extends Component{
             answerDisplay: [],
             problems: [],
             problemInWindow: 0,
-            user: null,
+            user: null
         }
     }
 
@@ -21,17 +23,20 @@ export default class DefenseConsole extends Component{
     }
 
     login = async (username, password) => {
-        const response = await axios.post("/auth/login", {username, password})
-        this.setState({user: response.data})
+       const response = await axios.post("/auth/login", {username, password})
+       this.props.setUser(response.data)
+       this.getProblems(response.data.user_id)
+
     }
     
     register = async (username, password) => {
-        const response = await axios.post("/auth/register", {username, password})
+       const response = await axios.post("/auth/register", {username, password})
         this.setState({user: response.data})
     }
 
-    getProblems = async () => {
-        const response = await axios.get('/api/get_problems');
+    getProblems = async (user_id) => {
+        const response = await axios.get('/api/get_problems', {user_id});
+        console.log(response.data)
         const doTheShuffle = (array) => {
             for(let i = array.length - 1; i > 0; i--){
             const j = Math.floor(Math.random() * i)
@@ -78,12 +83,13 @@ export default class DefenseConsole extends Component{
 
     }
 
-    
+
 
     render(){
+        console.log("from redux: ", this.props.user)
         const {problemInWindow, problems} = this.state;
         return(
-            !this.state.user
+            !this.props.user
                 ?
             <SignIn login={this.login} register={this.register}/>
             :
@@ -102,3 +108,13 @@ export default class DefenseConsole extends Component{
             </div>
             )}
 }
+
+function mapReduxStateToProps(reduxState){
+    return reduxState;
+}
+
+const mapDispatchToProps = {
+    setUser
+}
+
+export default connect(mapReduxStateToProps, mapDispatchToProps)(DefenseConsole);

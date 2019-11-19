@@ -46,5 +46,8 @@ module.exports = {
             req.session.user = newUser;
             res.status(200).send(req.session.user);
         }
+    },
+    getSession: async (req, res) => {
+        res.status(200).send(req.session.user);
     }
 }
