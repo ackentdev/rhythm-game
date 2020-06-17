@@ -11,5 +11,11 @@ module.exports = {
         const {answer_id} = req.params
         const updated = await db.update_correct([user_id, answer_id]);
         res.status(200).send(updated)
+    },
+    cadenHandler: (req, res) => {
+        console.log("search", req.query)
+        console.log("vegetable", req.body.vegetable)
+        console.log("id", req.params.id)
+        res.sendStatus(200)
     }
 }
