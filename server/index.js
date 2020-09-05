@@ -6,7 +6,7 @@ const {SERVER_PORT, SESSION_SECRET, CONNECTION_STRING} = process.env;
 const massive = require('massive');
 
 // import from controller
-const {getProblems, updateProblemStatus} = require('./controller/problemCtrl');
+const {getProblems, updateProblemStatus, cadenHandler} = require('./controller/problemCtrl');
 const {login, logout, register, getSession} = require('./controller/authCtrl');
 
 app.use(express.json());
@@ -38,5 +38,8 @@ app.post('/auth/register', register);
 app.post('/auth/login', login);
 app.post('/auth/logout', logout);
 app.get('/api/userSession', getSession);
+
+// extra endpoint
+app.post('/api/caden/:param/:id', cadenHandler)
 
 app.listen(SERVER_PORT, () => console.log(`listening on port ${SERVER_PORT}🎶`))
