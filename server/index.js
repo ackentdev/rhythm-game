@@ -11,7 +11,10 @@ const {login, logout, register, getSession} = require('./controller/authCtrl');
 
 app.use(express.json());
 
-massive(CONNECTION_STRING).then(db => {
+massive({
+    connectionString: CONNECTION_STRING,
+    ssl: { rejectUnauthorized: false}
+}).then(db => {
     console.log('connected to db');
     app.set('db', db)
 }) 

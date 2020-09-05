@@ -1,0 +1,45 @@
+$accent: #2FF30F;
+
+@mixin triangle-btn($side, $opp-side){
+    position: absolute;
+    width: 0;
+    height: 0;
+    background-color: transparent;
+    border: 1.5em solid transparent;
+    border-#{$side}-color: $accent;
+    #{$side}: 92%;
+}
+
+.problem-window {
+    width:40%;
+    height: 100%;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    .ufo {
+        position: relative;
+        top: 10px;
+        height: 30%;
+    }
+    .problem-container {
+        position: relative;
+        height: 35%;
+        display: flex;
+        align-items: center;
+        .problem {
+            width: 70%;
+            margin: 0 auto;
+        }
+        .prev-btn {
+            @include triangle-btn(right, left)
+        }
+        .next-btn {
+            @include triangle-btn(left, right)
+        }
+    }
+    .answer-status{
+        height: 30%;
+    }
+}

@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import Header from './Header';
 import ProblemWindow from './ProblemWindow';
 import AnswerWindow from './AnswerWindow';
+import "./DefenseConsole.scss"
 
 import { connect } from 'react-redux';
 import { setUser } from '../redux/reducer';
@@ -116,8 +116,6 @@ class DefenseConsole extends Component{
         
         return(
             <div className="defense-console">
-                <Header/>
-                <h1>This is the defense console</h1>
                 {!problems.length 
                     ? 
                 <h1>LOADING WINDOW</h1>
@@ -126,7 +124,9 @@ class DefenseConsole extends Component{
                     nextProblem={this.nextProblem}
                     prevProblem={this.prevProblem}
                     url={problems[problemInWindow].img}
-                    index={problemInWindow}/>}
+                    index={problemInWindow}
+                    problem={problems[problemInWindow]}/>
+                    }
                 
                 <AnswerWindow
                     problem={problems[problemInWindow]} 

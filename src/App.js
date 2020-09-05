@@ -7,6 +7,7 @@ import Instructions from './Components/Instructions';
 import Landing from './Components/Landing';
 import PrivateRoute from './Components/PrivateRoute';
 import SignIn from './Components/SignIn';
+import Header from './Components/Header';
 import { connect } from 'react-redux';
 import { setUser } from './redux/reducer';
 import "./Reset.css";
@@ -25,6 +26,7 @@ class App extends React.Component{
 
   render(){
     return <div className="App">
+      <Header/>
     <Switch>
       <Route exact path="/" component={Landing}/>
       <PrivateRoute path="/defense-console" component={DefenseConsole}/>

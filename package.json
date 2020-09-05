@@ -4,17 +4,20 @@
   "private": true,
   "proxy": "http://localhost:4020",
   "main": "./server",
+  "nodemonConfig": {
+    "ignore": ["src/*"]
+  },
   "dependencies": {
     "@material-ui/core": "^4.2.0",
     "axios": "^0.19.0",
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^3.0.8",
     "body-parser": "^1.19.0",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "express-session": "^1.16.2",
     "http-proxy-middleware": "^0.19.1",
     "massive": "^6.1.1",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "path": "^0.12.7",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

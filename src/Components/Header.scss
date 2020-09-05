@@ -1,0 +1,27 @@
+$primary-color: #000000;
+$secondary-color: #383636;
+$accent: #2FF30F;
+$select: #FFFFFF;
+
+.navigation {
+    height: 10vh;
+    background-color: $secondary-color;
+    border-bottom: 2px solid $accent;
+    display: flex;
+    align-items: center;
+    .links{
+       width: 30%;
+       position: absolute;
+       right: 30px; 
+       display: flex;
+       justify-content: space-between;
+        .nav-link {
+            color: $accent;
+            text-decoration: none;
+            font-family: 'Roboto Mono', monospace;
+        }
+        .nav-link:hover {
+            color: $select;
+        }
+    }
+}

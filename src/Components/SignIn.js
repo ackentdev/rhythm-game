@@ -50,7 +50,7 @@ class SignIn extends Component{
         const {username, password, newUser} = this.state
     return(
         <div className="sign-in">
-            <form className="sign-in-form"
+            <form className="sign-in__form"
                 onSubmit={(e) => {
                 e.preventDefault();
                 !newUser 
